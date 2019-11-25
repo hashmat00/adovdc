@@ -8,27 +8,10 @@ trigger:
 
 pool:
   name: Azure Pipelines
-steps:
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-  inputs:
-    PathtoPublish: 'VM-IIS'
-- task: AzureResourceManagerTemplateDeployment@3
-  inputs:
-    deploymentScope: 'Resource Group'
-    ConnectedServiceName: 'Pay-As-You-Go(945cfaa1-11b8-4f18-8bb1-0763430b4565)'
-    subscriptionName: '945cfaa1-11b8-4f18-8bb1-0763430b4565'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: 'DevProject'
-    location: 'West US 2'
-    templateLocation: 'Linked artifact'
-    csmFile: 'VM-IIS'
-    deploymentMode: 'Incremental'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-
 
 

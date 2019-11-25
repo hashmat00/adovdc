@@ -22,3 +22,15 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    ConnectedServiceName: 'Pay-As-You-Go (945cfaa1-11b8-4f18-8bb1-0763430b4565)'
+    subscriptionName: '945cfaa1-11b8-4f18-8bb1-0763430b4565'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'DevProject'
+    location: 'West US 2'
+    templateLocation: 'Linked artifact'
+    csmFile: 'deploy.json'
+    deploymentMode: 'Incremental'
+    

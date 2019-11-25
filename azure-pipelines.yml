@@ -24,7 +24,11 @@ steps:
     templateLocation: 'Linked artifact'
     csmFile: 'VM-IIS'
     deploymentMode: 'Incremental'
-
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 
 
 

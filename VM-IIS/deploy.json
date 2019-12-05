@@ -3,18 +3,20 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "adminUsername": {
-        "type": "string",
-        "defaultValue":"hashmat",
-        "metadata": {
-          "description": "Username for the Virtual Machine."
-        }
+        "reference": {
+              "keyVault": {
+                "id": "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/<rg-name>/providers/Microsoft.KeyVault/vaults/VDC"
+              },
+              "secretName": "Username"
+            }
       },
       "adminPassword": {
-        "type": "securestring",
-        "defaultValue":"Password123",
-        "metadata": {
-          "description": "Password for the Virtual Machine."
-        }
+        "reference": {
+              "keyVault": {
+                "id": "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/<rg-name>/providers/Microsoft.KeyVault/vaults/VDC"
+              },
+              "secretName": "AdminPassword"
+            }
       },
       "dnsLabelPrefix": {
         "type": "string",

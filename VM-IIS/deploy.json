@@ -10,11 +10,12 @@
         }
       },
       "adminPassword": {
+        "type":"secureObject",
         "reference": {
               "keyVault": {
                 "id": "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/DevProject/providers/Microsoft.KeyVault/vaults/VDC"
               },
-              "secretName": "AdminPassword"
+              "secretName": "adminPassword"
             }
       },
       "dnsLabelPrefix": {

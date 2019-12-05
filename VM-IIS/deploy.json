@@ -3,19 +3,19 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "adminUsername": {
-        "reference": {
-              "keyVault": {
-                "id": "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/DevProject/providers/Microsoft.KeyVault/vaults/VDC"
-              },
-              "secretName": "Username"
-            }
+        "type":"string",
+        "defaultValue": "admin",
+        "metadata": {
+          "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
+        }
       },
       "adminPassword": {
+        "type":"secureObject",
         "reference": {
               "keyVault": {
                 "id": "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/DevProject/providers/Microsoft.KeyVault/vaults/VDC"
               },
-              "secretName": "AdminPassword"
+              "secretName": "adminPassword"
             }
       },
       "dnsLabelPrefix": {

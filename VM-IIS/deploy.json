@@ -4,28 +4,19 @@
     "parameters": {
       "AdminUsername": {
         "type":"string",
-      "defaultValue": "admin"
     },
     "AdminPassword": {
-      "type":"secureObject",
-      "reference": {
-        "keyVault": {
-          "id": "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/DevProject/providers/Microsoft.KeyVault/vaults/VDC"
-        },
-        "secretName": "AdminPassword"
-      }
+      "type":"secureObject"
     },
      
       "dnsLabelPrefix": {
         "type": "string",
-        "defaultValue": "hash",
         "metadata": {
           "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
         }
       },
       "windowsOSVersion": {
         "type": "string",
-        "defaultValue": "2016-Datacenter",
         "allowedValues": [
           "2008-R2-SP1",
           "2012-Datacenter",
@@ -48,11 +39,7 @@
       },
 
       "resourceTags":{
-        "type":"object",
-        "defaultValue":{
-          "Env":"Development",
-          "Project": "DevProject"
-        }
+        "type":"object"
       }
     }, 
     "variables": {

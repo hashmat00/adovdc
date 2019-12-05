@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "AdminUsername": {
+          "value": "admin"
+        },
+        "AdminPassword": {
+          "reference": {
+            "keyVault": {
+              "id": "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/DevProject/providers/Microsoft.KeyVault/vaults/VDC"
+            },
+            "secretName": "AdminPassword"
+          }
+        },
+        "dnsLabelPrefix": {
+            "defaultValue": "hash"
+
+          },
+          "windowsOSVersion": {
+            "defaultValue": "2016-Datacenter"
+          },   
+          "resourceTags":{
+            "defaultValue":{
+              "Env":"Development",
+              "Project": "DevProject"
+            }
+          }
+    }
+  }

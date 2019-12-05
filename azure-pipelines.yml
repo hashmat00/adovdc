@@ -26,5 +26,5 @@ steps:
     resourceGroupName: 'DevProject'
     location: 'West US 2'
     templateLocation: 'Linked artifact'
-    csmFile: 'deploy.json'
+    csmFile: 'VM-IIS/deploy.json'
     deploymentMode: 'Incremental'

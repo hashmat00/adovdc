@@ -18,6 +18,12 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Pay-As-You-Go(1)(945cfaa1-11b8-4f18-8bb1-0763430b4565)'
+    KeyVaultName: 'VDC'
+    SecretsFilter: 'AdminPassword'
+
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'

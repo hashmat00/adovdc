@@ -252,16 +252,16 @@
                 }
             }
     },
-    {
+   {
             "type": "Microsoft.Authorization/locks",
             "apiVersion": "2015-01-01",
-            "name": "MyGroupLock",
+            "name": "rglock",
             "properties":
             {
                 "level": "ReadOnly",
                 "notes": "my notes"
             }
-    }
+   }
 
 
 

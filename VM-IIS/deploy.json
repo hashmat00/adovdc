@@ -101,6 +101,9 @@
         "sku": {
             "name": "[parameters('storageAccountType')]"
             },
+        "tags": {
+                "displayName": "[parameters('storageAccountName')]"
+            },
         "kind": "Storage",
         "resources": [
             {
@@ -126,6 +129,9 @@
           "apiVersion": "2018-11-01",
           "name": "[variables('publicIPAddressName')]",
           "location": "[parameters('location')]",
+          "tags": {
+                "displayName": "[variables('publicIPAddressName')]"
+            },
           "properties": {
             "publicIPAllocationMethod": "Dynamic",
             "dnsSettings": {
@@ -138,6 +144,9 @@
         "name": "[variables('vnetName')]",
         "location": "[parameters('location')]",
         "apiVersion":"2019-04-01",
+        "tags": {
+                "displayName": "[variables('vnetName')]"
+            },
         "properties": {
             "addressSpace": {
             "addressPrefixes": [
@@ -159,6 +168,9 @@
           "apiVersion":"2019-04-01",
           "name": "[variables('nicName')]",
           "location": "[parameters('location')]",
+          "tags": {
+                "displayName": "[variables('nicName')]"
+            },
           "dependsOn": [
             "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
             "[resourceId('Microsoft.Network/virtualNetworks/', variables('vnetName'))]"
@@ -185,6 +197,9 @@
           "apiVersion": "2018-10-01",
           "name": "[parameters('vmName')]",
           "location": "[parameters('location')]",
+          "tags": {
+                "displayName": "[parameters('vmName')]"
+            },
           "dependsOn": [
             "[resourceId('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
             "[resourceId('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
@@ -251,17 +266,7 @@
                     "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installWebServer.ps1"
                 }
             }
-    },
-   {
-            "type": "Microsoft.Authorization/locks",
-            "apiVersion": "2015-01-01",
-            "name": "rglock",
-            "properties":
-            {
-                "level": "ReadOnly",
-                "notes": "my notes"
-            }
-   }
+    }
 
 
 

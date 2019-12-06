@@ -124,14 +124,6 @@
              }
         ]
     },
-    {
-            "name": "[concat(parameters('storageAccountName'), '/Microsoft.Authorization/siteLock')]",
-            "type": "Microsoft.Storage/storageAccounts/providers/locks",
-            "apiVersion": "2015-01-01",
-            "properties": {
-                "level": "CannotDelete"
-            }
-        },
      {
         "type": "Microsoft.Network/publicIPAddresses",
           "apiVersion": "2018-11-01",
@@ -255,9 +247,10 @@
           }
      },
     {
-            "apiVersion": "2018-10-01",
+            
           "type": "Microsoft.Compute/virtualMachines/extensions",
             "name": "[concat(parameters('vmName'),'/', 'InstallWebServer')]",
+            "apiVersion": "2018-10-01",
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'))]"

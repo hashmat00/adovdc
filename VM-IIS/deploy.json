@@ -252,15 +252,16 @@
                 }
             }
     },
-    {        
-              "type": "Microsoft.Authorization/locks",
-              "name": "DontDelete",
-              "apiVersion": "2016-09-01",
-              "properties": {
-                "level": "CanNotDelete",
-                "notes": "Prevent deletion of the resourceGroup"
-              }
-     }
+    {
+            "type": "Microsoft.Authorization/locks",
+            "apiVersion": "2015-01-01",
+            "name": "MyGroupLock",
+            "properties":
+            {
+                "level": "ReadOnly",
+                "notes": "my notes"
+            }
+    }
 
 
 

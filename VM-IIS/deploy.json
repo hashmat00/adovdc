@@ -233,14 +233,14 @@
           }
      },
     {
-        "type": "Microsoft.Compute/virtualMachines/extensions",
-          "name": "[concat(parameters('vmName'),'/', 'InstallWebServer')]",
-          "location": "[parameters('location')]",
-          "apiVersion":"2019-03-01",
-          "dependsOn":[
-              "[concat('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-          ],
-          "properties": {
+            "apiVersion": "2018-10-01",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('vmName'),'/', 'InstallWebServer')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'))]"
+            ],
+            "properties": {
                 "publisher": "Microsoft.Compute",
                 "type": "CustomScriptExtension",
                 "typeHandlerVersion": "1.7",
@@ -251,9 +251,8 @@
                     ],
                     "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installWebServer.ps1"
                 }
-          }
-          
-     }
+            }
+        }
 
 
 

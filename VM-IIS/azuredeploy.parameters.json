@@ -1,19 +1,17 @@
 {
     "$schema":  "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion":  "1.0.0.1",
+    "contentVersion":  "1.0.0.0",
     "parameters":  {
-           "adminUsername":  {
-                 "value":  "hashmat"
+          "storageAccountName":{
+                "value": "Storage"
             },
-              "adminPassword":  {
-                   "reference":  {
-                    "keyVault":  {
-                        "id":  "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/DevProject/providers/Microsoft.KeyVault/vaults/VDC"
-                     },
-                    "secretName":  "AdminPassword"
-                      }
-                }
-                
-     }
+          "storageAccountType":{
+               "Value": "Standard_LRS"
+          },
+          "containerName": {
+               "Value": "logs"
+          }
+       }  
+     
 }
 

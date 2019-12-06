@@ -6,10 +6,10 @@
                 "value": "Storage"
             },
           "storageAccountType":{
-               "Value": "Standard_LRS"
+               "value": "Standard_LRS"
           },
           "containerName": {
-               "Value": "logs"
+               "value": "logs"
           },
           "fileShareName": {
                "value": "Tests"

@@ -10,8 +10,11 @@
           },
           "containerName": {
                "Value": "logs"
+          },
+          "fileShareName": {
+               "value": "Tests"
           }
-       }  
+      }  
      
 }
 

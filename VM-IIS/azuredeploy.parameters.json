@@ -19,10 +19,7 @@
              },
           "vmName":{
              "value": "HashVirtualMachine"
-             },
-          "adminUsername":{
-              "value": "hashmat"
-             },
+            },
           "adminpassword": {
                "reference": {
                  "keyVault": {

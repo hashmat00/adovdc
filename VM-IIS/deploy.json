@@ -51,24 +51,26 @@
         "apiVersion":"2019-04-01",
         "sku": {
             "name": "[parameters('storageAccountType')]"
-        },
-        "kind": "Storage"
-        },
-    {
-        "name": "[concat(parameters('storageAccountName'), '/default/', parameters('fileShareName'))]",
-            "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
-            "apiVersion":"2019-04-01",
-            "dependsOn": [
-                    "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
-                ]
-    },
-      {
-         "name": "[concat('default/', parameters('containerName'))]",
-            "type": "blobServices/containers",
-            "apiVersion":"2019-04-01",
-             "dependsOn": [
-                 "[parameters('storageAccountName')]"
-                 ]
+            },
+        "kind": "Storage",
+        "resources": [
+            {
+                "name": "[concat(parameters('storageAccountName'), '/default/', parameters('fileShareName'))]",
+                    "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+                    "apiVersion":"2019-04-01",
+                    "dependsOn": [
+                            "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+                        ]
+            },
+            {
+                "name": "[concat('default/', parameters('containerName'))]",
+                    "type": "blobServices/containers",
+                    "apiVersion":"2019-04-01",
+                    "dependsOn": [
+                        "[parameters('storageAccountName')]"
+                        ]
+             }
+        ]
     },
 
      {

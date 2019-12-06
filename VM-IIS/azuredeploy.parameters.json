@@ -13,7 +13,10 @@
           },
           "fileShareName": {
                "value": "test1"
-          }
+          },
+          "dnsLabelPrefix": {
+               "value": "hash"
+             }
       }  
      
 }

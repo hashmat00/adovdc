@@ -121,7 +121,18 @@
              }
         ]
     },
-
+     {
+        "type": "Microsoft.Network/publicIPAddresses",
+          "apiVersion": "2018-11-01",
+          "name": "[variables('publicIPAddressName')]",
+          "location": "[parameters('location')]",
+          "properties": {
+            "publicIPAllocationMethod": "Dynamic",
+            "dnsSettings": {
+              "domainNameLabel": "[parameters('dnsLabelPrefix')]"
+            }
+          }
+    },
     {
       "type": "Microsoft.Network/virtualNetworks",
         "name": "[variables('vnetName')]",
@@ -168,19 +179,7 @@
               }
             ]
           }
-    },
-     {
-        "type": "Microsoft.Network/publicIPAddresses",
-          "apiVersion": "2018-11-01",
-          "name": "[variables('publicIPAddressName')]",
-          "location": "[parameters('location')]",
-          "properties": {
-            "publicIPAllocationMethod": "Dynamic",
-            "dnsSettings": {
-              "domainNameLabel": "[parameters('dnsLabelPrefix')]"
-            }
-          }
-    },
+    },   
     {
         "type": "Microsoft.Compute/virtualMachines",
           "apiVersion": "2018-10-01",
@@ -234,7 +233,7 @@
      },
     {
             "apiVersion": "2018-10-01",
-            "type": "Microsoft.Compute/virtualMachines/extensions",
+          "type": "Microsoft.Compute/virtualMachines/extensions",
             "name": "[concat(parameters('vmName'),'/', 'InstallWebServer')]",
             "location": "[parameters('location')]",
             "dependsOn": [
@@ -252,7 +251,16 @@
                     "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installWebServer.ps1"
                 }
             }
-        }
+    },
+    {        
+              "type": "Microsoft.Authorization/locks",
+              "name": "DontDelete",
+              "apiVersion": "2016-09-01",
+              "properties": {
+                "level": "CanNotDelete",
+                "notes": "Prevent deletion of the resourceGroup"
+              }
+     }
 
 
 

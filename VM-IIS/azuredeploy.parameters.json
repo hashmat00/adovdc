@@ -3,7 +3,7 @@
     "contentVersion":  "1.0.0.0",
     "parameters":  {
           "storageAccountName":{
-                "value": "Hash-Storage"
+                "value": "Hash-Storage-01"
             },
           "storageAccountType":{
                "value": "Standard_LRS"

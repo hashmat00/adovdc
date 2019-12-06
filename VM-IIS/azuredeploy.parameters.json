@@ -15,7 +15,6 @@
         },
         "dnsLabelPrefix": {
             "defaultValue": "hash"
-
           },
           "windowsOSVersion": {
             "defaultValue": "2016-Datacenter"
@@ -27,4 +26,4 @@
             }
           }
     }
-  }
+}

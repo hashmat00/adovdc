@@ -4,7 +4,6 @@
   "parameters": {
     "storageAccountType": {
       "type": "string",
-      "defaultValue": "Standard_LRS",
       "allowedValues": [
         "Standard_LRS"
       ],
@@ -13,8 +12,7 @@
       }
     },
     "storageAccountName":{
-        "type":"string",
-        "defaultValue":"Storage"
+        "type":"string"
     },
     "location":{
         "type":"string",
@@ -23,7 +21,6 @@
     "fileShareName": {
             "type": "string",
             "minLength": 3,
-            "maxLength": 63,
             "metadata": {
                 "description": "Specifies the name of the File Share. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only."
             }

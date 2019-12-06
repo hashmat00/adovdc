@@ -44,13 +44,13 @@
           "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
         }
     },
-    "AdminUsername":{
+    "adminusername":{
       "type":"securestring",
       "metadata": {
           "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
         }
     },
-    "AdminPassword":{
+    "adminpassword":{
       "type":"securestring",
       "metadata": {
           "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
@@ -189,9 +189,9 @@
             "vmSize": "Standard_A2"
           },
           "osProfile": {
-            "computerName": "[variables('vmName')]",
-            "adminUsername": "[parameters('AdminUsername')]",
-            "adminPassword": "[parameters('AdminPassword')]"
+            "computerName": "[parameters('vmName')]",
+            "adminUsername": "[parameters('adminusername')]",
+            "adminPassword": "[parameters('adminpassword')]"
           },
           "storageProfile": {
             "imageReference": {

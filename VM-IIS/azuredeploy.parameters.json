@@ -18,7 +18,7 @@
                "value": "hash"
              },
           "vmName":{
-             "value": "HashVirtualMachine"
+             "value": "vm-01"
             },
           "adminpassword": {
                "reference": {

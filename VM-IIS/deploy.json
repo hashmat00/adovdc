@@ -125,7 +125,7 @@
         ]
     },
     {
-            "name": "[concat('lock', '/Microsoft.Authorization/myLock')]",
+            "name": "[concat(parameters('storageAccountName'), '/Microsoft.Authorization/siteLock')]",
             "type": "Microsoft.Storage/storageAccounts/providers/locks",
             "apiVersion": "2015-01-01",
             "properties": {

@@ -126,13 +126,13 @@
     },
     {
             "name": "Delete",
-            "type": "Microsoft.Storage/storageAccounts/providers/locks",
-            "apiVersion": "2015-01-01",
-            "properties": {
-                "level": "CannotDelete"
-            }
-        },
-     {
+              "type": "Microsoft.Storage/storageAccounts/providers/locks",
+              "apiVersion": "2015-01-01",
+              "properties": {
+                  "level": "CannotDelete"
+              }
+     },
+    {
         "type": "Microsoft.Network/publicIPAddresses",
           "apiVersion": "2018-11-01",
           "name": "[variables('publicIPAddressName')]",

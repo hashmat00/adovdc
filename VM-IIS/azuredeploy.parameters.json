@@ -20,6 +20,9 @@
           "vmName":{
              "value": "vm-01"
             },
+            "vmSize": {
+              "value": "Standard_A1_v2"
+          }
           "adminpassword": {
                "reference": {
                  "keyVault": {

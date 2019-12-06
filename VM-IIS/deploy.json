@@ -9,7 +9,7 @@
       ],
       "metadata": {
         "description": "Type of redundancy for your storage account"
-      }
+         }
     },
     "storageAccountName":{
         "type":"string"

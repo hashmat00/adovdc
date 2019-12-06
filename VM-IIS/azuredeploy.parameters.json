@@ -22,15 +22,15 @@
             },
             "vmSize": {
               "value": "Standard_A1_v2"
-          }
+          },
           "adminpassword": {
-               "reference": {
-                 "keyVault": {
-                   "id": "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/DevProject/providers/Microsoft.KeyVault/vaults/VDC"
-                 },
-                 "secretName": "adminpassword"
-               }
-           },
+            "reference": {
+              "keyVault": {
+                "id": "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/DevProject/providers/Microsoft.KeyVault/vaults/VDC"
+              },
+              "secretName": "adminpassword"
+            }
+            },
            "adminusername": {
                "reference": {
                  "keyVault": {

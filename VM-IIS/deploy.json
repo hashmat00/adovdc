@@ -170,7 +170,7 @@
                   "addressPrefix": "[variables('subnetPrefix')]"
                   },
                   "networkSecurityGroup": {
-                     "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
                       }
                }
               ]

@@ -146,36 +146,7 @@
             }
           }
     },
-    {
-      "type": "Microsoft.Network/virtualNetworks",
-        "name": "[variables('vnetName')]",
-        "location": "[parameters('location')]",
-        "apiVersion":"2019-04-01",
-        "dependsOn":[
-            "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
-        ],
-        "tags": {
-                "displayName": "[variables('vnetName')]"
-            },
-          "properties": {
-              "addressSpace": {
-              "addressPrefixes": [
-                  "[variables('addressPrefix')]"
-              ]
-              },
-              "subnets": [
-              {
-                  "name": "[variables('subnetName')]",
-                  "properties": {
-                  "addressPrefix": "[variables('subnetPrefix')]"
-                  },
-                  "networkSecurityGroup": {
-                     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
-                      }
-               }
-              ]
-          }
-    },
+ 
     {
         "type": "Microsoft.Network/networkInterfaces",
           "apiVersion":"2019-04-01",
@@ -216,7 +187,34 @@
             "properties": {
                 "securityRules": "[parameters('networkSecurityGroupRules')]"
             }
-        },   
+        },
+       {
+      "type": "Microsoft.Network/virtualNetworks",
+        "name": "[variables('vnetName')]",
+        "location": "[parameters('location')]",
+        "apiVersion":"2019-04-01",
+        "tags": {
+                "displayName": "[variables('vnetName')]"
+            },
+          "properties": {
+              "addressSpace": {
+              "addressPrefixes": [
+                  "[variables('addressPrefix')]"
+              ]
+              },
+              "subnets": [
+              {
+                  "name": "[variables('subnetName')]",
+                  "properties": {
+                  "addressPrefix": "[variables('subnetPrefix')]"
+                  },
+                  "networkSecurityGroup": {
+                     "id": "[variables('nsgId')]"
+                      }
+               }
+              ]
+          }
+    },   
     {
         "type": "Microsoft.Compute/virtualMachines",
           "apiVersion": "2018-10-01",

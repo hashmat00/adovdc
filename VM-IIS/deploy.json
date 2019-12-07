@@ -165,8 +165,11 @@
                   "name": "[variables('subnetName')]",
                   "properties": {
                   "addressPrefix": "[variables('subnetPrefix')]"
-                  }
-              }
+                  },
+                  "networkSecurityGroup": {
+                     "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                      }
+               }
               ]
           }
     },
@@ -179,7 +182,6 @@
                 "displayName": "[variables('nicName')]"
             },
           "dependsOn": [
-            "[resourceId('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]",
             "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
             "[resourceId('Microsoft.Network/virtualNetworks/', variables('vnetName'))]"
           ],

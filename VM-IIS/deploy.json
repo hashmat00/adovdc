@@ -94,7 +94,7 @@
     "publicIPAddressName": "myPublicIP",
     "nicName": "myVMNic",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]",
-    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
+    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
     
   },
 
@@ -266,8 +266,7 @@
             }
           }
      },
-    {
-            
+    {  
           "type": "Microsoft.Compute/virtualMachines/extensions",
             "name": "[concat(parameters('vmName'),'/', 'InstallWebServer')]",
             "apiVersion": "2018-10-01",

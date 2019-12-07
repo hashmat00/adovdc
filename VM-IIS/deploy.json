@@ -76,6 +76,12 @@
             "metadata": {
                 "description": "Size of the virtual machine"
             }
+        },
+      "networkSecurityGroupName": {
+            "type": "string"
+        },
+        "networkSecurityGroupRules": {
+            "type": "array"
         }
     
   },
@@ -87,7 +93,8 @@
     "subnetPrefix": "10.0.0.0/24",
     "publicIPAddressName": "myPublicIP",
     "nicName": "myVMNic",
-    "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]"
+    "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]",
+    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
     
   },
 
@@ -147,21 +154,21 @@
         "tags": {
                 "displayName": "[variables('vnetName')]"
             },
-        "properties": {
-            "addressSpace": {
-            "addressPrefixes": [
-                "[variables('addressPrefix')]"
-            ]
-            },
-            "subnets": [
-            {
-                "name": "[variables('subnetName')]",
-                "properties": {
-                "addressPrefix": "[variables('subnetPrefix')]"
-                }
-            }
-            ]
-    }
+          "properties": {
+              "addressSpace": {
+              "addressPrefixes": [
+                  "[variables('addressPrefix')]"
+              ]
+              },
+              "subnets": [
+              {
+                  "name": "[variables('subnetName')]",
+                  "properties": {
+                  "addressPrefix": "[variables('subnetPrefix')]"
+                  }
+              }
+              ]
+          }
     },
     {
         "type": "Microsoft.Network/networkInterfaces",
@@ -172,6 +179,7 @@
                 "displayName": "[variables('nicName')]"
             },
           "dependsOn": [
+            "[resourceId('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]",
             "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
             "[resourceId('Microsoft.Network/virtualNetworks/', variables('vnetName'))]"
           ],
@@ -189,9 +197,21 @@
                   }
                 }
               }
-            ]
+            ],
+            "networkSecurityGroup": {
+                    "id": "[variables('nsgId')]"
+              }
           }
-    },   
+    },
+    {
+          "name": "[parameters('networkSecurityGroupName')]",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2019-02-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "securityRules": "[parameters('networkSecurityGroupRules')]"
+            }
+        },   
     {
         "type": "Microsoft.Compute/virtualMachines",
           "apiVersion": "2018-10-01",

@@ -82,10 +82,6 @@
         },
         "networkSecurityGroupRules": {
             "type": "array"
-        },
-        "hmnsgid": {
-            "defaultValue": "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/DevProject/providers/Microsoft.Network/networkSecurityGroups/hm-nsg",
-            "type": "String"
         }
     
   },
@@ -98,7 +94,7 @@
     "publicIPAddressName": "myPublicIP",
     "nicName": "myVMNic",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]",
-    "nsgId1": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
     
   },
 
@@ -160,6 +156,7 @@
                 "displayName": "[variables('nicName')]"
             },
           "dependsOn": [
+            "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
             "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
             "[resourceId('Microsoft.Network/virtualNetworks/', variables('vnetName'))]"
           ],
@@ -177,7 +174,10 @@
                   }
                 }
               }
-            ]
+            ],
+            "networkSecurityGroup":{
+                "id":"[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+            }
             
           }
     },
@@ -196,7 +196,6 @@
         "location": "[parameters('location')]",
         "apiVersion":"2019-04-01",
         "dependsOn":[
-          "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
         ],
         "tags": {
                 "displayName": "[variables('vnetName')]"
@@ -214,32 +213,14 @@
                   "addressPrefix": "[variables('subnetPrefix')]"
                   },
                   "networkSecurityGroup": {
-                     "id": "[variables('nsgid1')]"
-                      },
-                  "delegations": [],
-                            "privateEndpointNetworkPolicies": "Enabled",
-                            "privateLinkServiceNetworkPolicies": "Enabled"
+                
+                      }
+                  
                }
               ]
           }
     },
-    {
-          "type": "Microsoft.Network/virtualNetworks/subnets",
-            "apiVersion": "2019-09-01",
-            "name": "[concat(variables('vnetName'),'/', variables('subnetName'))]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
-            ],
-            "properties": {
-                "addressPrefix": "10.0.0.0/24",
-                "networkSecurityGroup": {
-                    "id": "[variables('nsgId1')]"
-                },
-                "delegations": [],
-                "privateEndpointNetworkPolicies": "Enabled",
-                "privateLinkServiceNetworkPolicies": "Enabled"
-            }
-      }, 
+    
     {
         "type": "Microsoft.Compute/virtualMachines",
           "apiVersion": "2018-10-01",

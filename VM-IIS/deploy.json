@@ -175,7 +175,6 @@
               }
             ],
             "networkSecurityGroup": {
-                    "id": "[variables('nsgId')]"
               }
           }
     },

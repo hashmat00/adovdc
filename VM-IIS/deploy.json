@@ -146,7 +146,6 @@
             }
           }
     },
- 
     {
         "type": "Microsoft.Network/networkInterfaces",
           "apiVersion":"2019-04-01",
@@ -182,7 +181,7 @@
           }
     },
     {
-          "name": "[parameters('networkSecurityGroupName')]",
+      "name": "[parameters('networkSecurityGroupName')]",
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-02-01",
             "location": "[parameters('location')]",
@@ -213,7 +212,7 @@
                   "addressPrefix": "[reference(resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName')), '2018-03-01').addressPrefix]",
                   "networkSecurityGroup": {
                     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
-                  }
+                     }
                 }
               }
             ]

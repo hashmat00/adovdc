@@ -196,7 +196,7 @@
         "location": "[parameters('location')]",
         "apiVersion":"2019-04-01",
         "dependsOn":[
- 
+          "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
         ],
         "tags": {
                 "displayName": "[variables('vnetName')]"
@@ -230,7 +230,7 @@
             "properties": {
                 "addressPrefix": "10.0.0.0/24",
                 "networkSecurityGroup": {
-                    "id": "[parameters('hmnsgid')]"
+                    "id": "[variables('nsgId1')]"
                 },
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",

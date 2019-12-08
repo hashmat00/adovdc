@@ -214,7 +214,7 @@
                   "addressPrefix": "[variables('subnetPrefix')]"
                   },
                   "networkSecurityGroup": {
-                     "id": "[parameters('hmnsgid')]"
+                     "id": "[variables('nsgid1')]"
                       },
                   "delegations": [],
                             "privateEndpointNetworkPolicies": "Enabled",

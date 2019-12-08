@@ -82,6 +82,10 @@
         },
         "networkSecurityGroupRules": {
             "type": "array"
+        },
+        "hmnsgid": {
+            "defaultValue": "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/DevProject/providers/Microsoft.Network/networkSecurityGroups/hm-nsg",
+            "type": "String"
         }
     
   },
@@ -189,12 +193,11 @@
         },
        {
       "type": "Microsoft.Network/virtualNetworks",
-        "id": "/subscriptions/945cfaa1-11b8-4f18-8bb1-0763430b4565/resourceGroups/DevProject/providers/Microsoft.Network/virtualNetworks/myVNet",
         "name": "[variables('vnetName')]",
         "location": "[parameters('location')]",
         "apiVersion":"2019-04-01",
         "dependsOn":[
-         "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+ 
         ],
         "tags": {
                 "displayName": "[variables('vnetName')]"
@@ -212,7 +215,7 @@
                   "addressPrefix": "[variables('subnetPrefix')]"
                   },
                   "networkSecurityGroup": {
-                     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                     "id": "[parameters('hmnsgid')]"
                       }
                }
               ]

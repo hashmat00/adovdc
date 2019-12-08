@@ -215,7 +215,10 @@
                   },
                   "networkSecurityGroup": {
                      "id": "[parameters('hmnsgid')]"
-                      }
+                      },
+                  "delegations": [],
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
                }
               ]
           }

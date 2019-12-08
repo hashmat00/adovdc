@@ -156,9 +156,9 @@
                 "displayName": "[variables('nicName')]"
             },
           "dependsOn": [
-            "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
             "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
-            "[resourceId('Microsoft.Network/virtualNetworks/', variables('vnetName'))]"
+            "[resourceId('Microsoft.Network/virtualNetworks/', variables('vnetName'))]",
+            "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
           ],
           "properties": {
             "ipConfigurations": [
@@ -175,9 +175,9 @@
                 }
               }
             ],
-            "networkSecurityGroup":{
-                "id":"[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
-            }
+            "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                }
             
           }
     },

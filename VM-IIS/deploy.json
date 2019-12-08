@@ -177,9 +177,8 @@
                   }
                 }
               }
-            ],
-            "networkSecurityGroup": {
-              }
+            ]
+            
           }
     },
     {
@@ -220,7 +219,24 @@
                }
               ]
           }
-    },   
+    },
+    {
+          "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2019-09-01",
+            "name": "[concat(variables('vnetName'), variables('subnetName'))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
+            ],
+            "properties": {
+                "addressPrefix": "10.0.0.0/24",
+                "networkSecurityGroup": {
+                    "id": "[parameters('hmnsgid')]"
+                },
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Enabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+      }, 
     {
         "type": "Microsoft.Compute/virtualMachines",
           "apiVersion": "2018-10-01",

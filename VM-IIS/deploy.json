@@ -158,7 +158,7 @@
           "dependsOn": [
             "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
             "[resourceId('Microsoft.Network/virtualNetworks/', variables('vnetName'))]",
-            "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+            //"[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
           ],
           "properties": {
             "ipConfigurations": [
@@ -174,10 +174,10 @@
                   }
                 }
               }
-            ],
-            "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
-                }
+            ]//,
+            //"networkSecurityGroup": {
+                   // "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+              //  }
             
           }
     },
@@ -192,8 +192,8 @@
     },
     {
       "name": "apply-nsg-to-subnet",
-        "apiVersion": "2017-08-01",
         "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2017-08-01",
         "resourceGroup": "[resourceGroup().name]",
         "dependsOn": [
           "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"

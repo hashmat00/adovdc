@@ -74,7 +74,27 @@
                       }
                   }
               ]
-          }
+          },
+
+        
+        "aadClientID": {
+            "value": "5a50f40f-c439-4748-871e-e3eea9af3968"
+        },
+        "aadClientSecret": {
+            "value": "encrypt"
+        },
+        "keyVaultName": {
+            "value": "vdc"
+        },
+        "keyVaultResourceGroup": {
+            "value": "[parameters('keyVaultResourceGroup')]"
+        },
+        "useExistingKek": {
+            "value": "[parameters('useExistingKek')]"
+        },
+        "keyEncryptionKeyURL": {
+            "value": "[parameters('keyEncryptionKeyURL')]"
+        }
       }  
      
 }

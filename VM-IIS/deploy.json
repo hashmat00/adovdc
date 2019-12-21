@@ -82,7 +82,70 @@
         },
         "networkSecurityGroupRules": {
             "type": "array"
-        }
+        },
+
+        "aadClientID": {
+      "type": "string",
+      "defaultValue":"5a50f40f-c439-4748-871e-e3eea9af3968",
+      "metadata": {
+        "description": "Client ID of AAD app which has permissions to KeyVault"
+      }
+    },
+    "aadClientSecret": {
+      "type": "securestring",
+      "defaultValue":"encrypt",
+      "metadata": {
+        "description": "Client Secret of AAD app which has permissions to KeyVault"
+      }
+    },
+    "keyVaultName": {
+      "type": "string",
+      "defaultValue":"VDC",
+      "metadata": {
+        "description": "Name of the KeyVault to place the volume encryption key"
+      }
+    },
+    "keyVaultResourceGroup": {
+      "type": "string",
+      "defaultValue":"[resourceGroup().location]",
+      "metadata": {
+        "description": "Resource group of the KeyVault"
+      }
+    },
+    "useExistingKek": {
+      "type": "string",
+      "defaultValue": "nokek",
+      "allowedValues": [
+        "nokek",
+        "kek"
+      ],
+      "metadata": {
+        "description": "Select kek if the secret should be encrypted with a key encryption key and pass explicit keyEncryptionKeyURL. For nokek, you can keep keyEncryptionKeyURL empty."
+      }
+    },
+    "keyEncryptionKeyURL": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "URL of the KeyEncryptionKey used to encrypt the volume encryption key"
+      }
+    },
+    "volumeType": {
+      "type": "string",
+      "defaultValue": "All",
+      "metadata": {
+        "description": "Type of the volume OS or Data to perform encryption operation"
+      }
+    },
+    "sequenceVersion": {
+      "type": "string",
+      "defaultValue": "1.0",
+      "metadata": {
+        "description": "Pass in an unique value like a GUID everytime the operation needs to be force run"
+      }
+    }
+
+
     
   },
 
@@ -94,7 +157,17 @@
     "publicIPAddressName": "myPublicIP",
     "nicName": "myVMNic",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]",
-    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
+
+
+
+    "extensionName": "AzureDiskEncryption",
+    "extensionVersion": "1.1",
+    "encryptionOperation": "EnableEncryption",
+    "keyEncryptionAlgorithm": "RSA-OAEP",
+    "updateVmUrl": "[concat('https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-encrypt-running-windows-vm/updatevm-',parameters('useExistingKek'),'.json')]",
+    "keyVaultURL": "[concat('https://', parameters('keyVaultName'), '.vault.azure.net/')]",
+    "keyVaultResourceID": "[concat(subscription().id,'/resourceGroups/',parameters('keyVaultResourceGroup'),'/providers/Microsoft.KeyVault/vaults/', parameters('keyVaultName'))]"
     
   },
 
@@ -320,6 +393,30 @@
                     "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installWebServer.ps1"
                 }
             }
+     },
+       {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('vmName'),'/', variables('extensionName'))]",
+      "apiVersion": "2016-04-30-preview",
+      "location": "[parameters('location')]",
+      "properties": {
+        "publisher": "Microsoft.Azure.Security",
+        "type": "AzureDiskEncryption",
+        "typeHandlerVersion": "[variables('extensionVersion')]",
+        "autoUpgradeMinorVersion": true,
+        "forceUpdateTag": "[parameters('sequenceVersion')]",
+        "settings": {
+          "AADClientID": "[parameters('aadClientID')]",
+          "KeyVaultURL": "[variables('keyVaultURL')]",
+          "KeyEncryptionKeyURL": "[parameters('keyEncryptionKeyURL')]",
+          "KeyEncryptionAlgorithm": "[variables('keyEncryptionAlgorithm')]",
+          "VolumeType": "[parameters('volumeType')]",
+          "EncryptionOperation": "[variables('encryptionOperation')]"
+        },
+        "protectedSettings": {
+          "AADClientSecret": "[parameters('aadClientSecret')]"
+        }
+      }
     }
 
 

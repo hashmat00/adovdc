@@ -121,7 +121,7 @@
     },
     "keyEncryptionKeyURL": {
       "type": "string",
-      "defaultValue": "",
+      "defaultValue": "https://vdc.vault.azure.net/keys/diskEncryption/5ff75762941a4fba9008961bb5bbc099",
       "metadata": {
         "description": "URL of the KeyEncryptionKey used to encrypt the volume encryption key"
       }
@@ -368,57 +368,7 @@
               }
             }
           }
-     },
-    {  
-          "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('vmName'),'/', 'InstallWebServer')]",
-            "apiVersion": "2018-10-01",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'))]"
-            ],
-            "properties": {
-                "publisher": "Microsoft.Compute",
-                "type": "CustomScriptExtension",
-                "typeHandlerVersion": "1.7",
-                "autoUpgradeMinorVersion":true,
-                "settings": {
-                    "fileUris": [
-                        "https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/tutorial-vm-extension/installWebServer.ps1"
-                    ],
-                    "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installWebServer.ps1"
-                }
-            }
-     },
-       {
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/', variables('extensionName'))]",
-      "apiVersion": "2016-04-30-preview",
-      "location": "[parameters('location')]",
-       "dependsOn": [
-        "[resourceId('Microsoft.Compute/virtualMachines',  parameters('vmName'))]"
-      ],
-      "properties": {
-        "publisher": "Microsoft.Azure.Security",
-        "type": "AzureDiskEncryption",
-        "typeHandlerVersion": "[variables('extensionVersion')]",
-        "autoUpgradeMinorVersion": true,
-        "forceUpdateTag": "[parameters('sequenceVersion')]",
-        "settings": {
-          "AADClientID": "[parameters('aadClientID')]",
-          "KeyVaultURL": "[variables('keyVaultURL')]",
-          "KeyEncryptionKeyURL": "[parameters('keyEncryptionKeyURL')]",
-          "KeyEncryptionAlgorithm": "[variables('keyEncryptionAlgorithm')]",
-          "VolumeType": "[parameters('volumeType')]",
-          "EncryptionOperation": "[variables('encryptionOperation')]"
-        },
-        "protectedSettings": {
-          "AADClientSecret": "[parameters('aadClientSecret')]"
-        }
-      }
-    }
-
-
+     }
 
   ],
 

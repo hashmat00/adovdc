@@ -395,6 +395,9 @@
       "name": "[concat(parameters('vmName'),'/', variables('extensionName'))]",
       "apiVersion": "2016-04-30-preview",
       "location": "[parameters('location')]",
+       "dependsOn": [
+        "[resourceId('Microsoft.Compute/virtualMachines',  parameters('vmName'))]"
+      ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",
         "type": "AzureDiskEncryption",

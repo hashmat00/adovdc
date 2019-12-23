@@ -358,7 +358,7 @@
             "name": "[concat(parameters('vmName'),'/', variables('extensionName'))]",
             "location": "[parameters('location')]",
             "dependsOn": [
-             "[resourceId('Microsoft.Compute/virtualMachines/',  parameters('vmName'), variables('extensionName'))]"
+             "[resourceId('Microsoft.Compute/virtualMachines/',  parameters('vmName'))]"
              ],
             "properties": {
                 "publisher": "Microsoft.Azure.Security",

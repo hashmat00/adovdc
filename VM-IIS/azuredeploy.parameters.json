@@ -74,30 +74,7 @@
                       }
                   }
               ]
-          },
-
-          "keyVaultName": {
-            "value": "VDC"
-        },
-        "keyVaultResourceGroup": {
-            "value": "DevProject"
-        },
-        "keyEncryptionKeyURL": {
-            "value": "https://vdc.vault.azure.net/keys/diskEncryption/5ff75762941a4fba9008961bb5bbc099"
-        },
-        "volumeType": {
-            "value": "All"
-        },
-        "forceUpdateTag": {
-            "value": "1.0"
-        },
-        "resizeOSDisk": {
-            "value": false
-        },
-        "location": {
-            "value": "westus2"
-        }
-      }  
-     
+          }  
+     }
 }
 

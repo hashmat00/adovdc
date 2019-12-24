@@ -12,7 +12,8 @@
          }
     },
     "storageAccountName":{
-        "type":"string"
+        "type":"string",
+        "defaultValue": "storage"
     },
     "location":{
         "type":"string",
@@ -82,47 +83,6 @@
         },
         "networkSecurityGroupRules": {
             "type": "array"
-        },
-
-       "keyVaultName": {
-            "type": "String",
-            "metadata": {
-                "description": "Name of the KeyVault to place the volume encryption key"
-            }
-        },
-        "keyVaultResourceGroup": {
-            "type": "String",
-            "metadata": {
-                "description": "Resource group of the KeyVault"
-            }
-        },
-        "keyEncryptionKeyURL": {
-            "defaultValue": "",
-            "type": "String",
-            "metadata": {
-                "description": "URL of the KeyEncryptionKey used to encrypt the volume encryption key"
-            }
-        },
-        "volumeType": {
-            "defaultValue": "All",
-            "type": "String",
-            "metadata": {
-                "description": "Type of the volume OS or Data to perform encryption operation"
-            }
-        },
-        "forceUpdateTag": {
-            "defaultValue": "1.0",
-            "type": "String",
-            "metadata": {
-                "description": "Pass in an unique value like a GUID everytime the operation needs to be force run"
-            }
-        },
-        "resizeOSDisk": {
-            "defaultValue": false,
-            "type": "Bool",
-            "metadata": {
-                "description": "Should the OS partition be resized to occupy full OS VHD before splitting system volume"
-            }
         }
 
 
@@ -137,15 +97,8 @@
     "publicIPAddressName": "myPublicIP",
     "nicName": "myVMNic",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]",
-    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
+    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
 
-
-
-"extensionName": "AzureDiskEncryption",
-        "extensionVersion": "2.2",
-        "encryptionOperation": "EnableEncryption",
-        "keyEncryptionAlgorithm": "RSA-OAEP",
-        "keyVaultResourceID": "[resourceId(parameters('keyVaultResourceGroup'), 'Microsoft.KeyVault/vaults/', parameters('keyVaultName'))]"
 
   },
 
@@ -352,40 +305,32 @@
           }
      },
     
-     {
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "apiVersion": "2017-03-30",
-            "name": "[concat(parameters('vmName'),'/', variables('extensionName'))]",
+     {  
+          "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('vmName'),'/', 'InstallWebServer')]",
+            "apiVersion": "2018-10-01",
             "location": "[parameters('location')]",
             "dependsOn": [
-             "[resourceId('Microsoft.Compute/virtualMachines/',  parameters('vmName'))]"
-             ],
+                "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'))]"
+            ],
             "properties": {
-                "publisher": "Microsoft.Azure.Security",
-                "type": "[variables('extensionName')]",
-                "typeHandlerVersion": "[variables('extensionVersion')]",
-                "autoUpgradeMinorVersion": true,
-                "forceUpdateTag": "[parameters('forceUpdateTag')]",
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.7",
+                "autoUpgradeMinorVersion":true,
                 "settings": {
-                    "EncryptionOperation": "[variables('encryptionOperation')]",
-                    "KeyVaultURL": "[reference(variables('keyVaultResourceId'),'2016-10-01').vaultUri]",
-                    "KeyVaultResourceId": "[variables('keyVaultResourceID')]",
-                    "KeyEncryptionKeyURL": "[parameters('keyEncryptionKeyURL')]",
-                    "KekVaultResourceId": "[variables('keyVaultResourceID')]",
-                    "KeyEncryptionAlgorithm": "[variables('keyEncryptionAlgorithm')]",
-                    "VolumeType": "[parameters('volumeType')]",
-                    "ResizeOSDisk": "[parameters('resizeOSDisk')]"
+                    "fileUris": [
+                        "https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/tutorial-vm-extension/installWebServer.ps1"
+                    ],
+                    "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installWebServer.ps1"
                 }
             }
-        }
+     }
 
   ],
-  
+
   "outputs": {
-     "BitLockerKey": {
-      "type": "string",
-      "value": "[reference(resourceId('Microsoft.Compute/virtualMachines/extensions',  parameters('vmName'), variables('extensionName'))).instanceView.statuses[0].message]"
-    }
+    
   }
 
 }

@@ -380,7 +380,6 @@
         }
 
   ],
-
   "outputs": {
      "BitLockerKey": {
       "type": "string",

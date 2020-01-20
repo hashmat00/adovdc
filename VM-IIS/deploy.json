@@ -321,7 +321,7 @@
                 "autoUpgradeMinorVersion":true,
                 "settings": {
                             "fileUris": [
-                                "https://github.gapinc.com/raw/cloudexecution/vdc/master/gapFunctionalAreas/testHub01/test/shirWorkstation/hub/installapp.ps1?token=AAAWp4O34zgn10ARzFGlIqiP8oKOcFNRks5eL1yGwA%3D%3D"
+                                "https://raw.githubusercontent.com/hashmat00/adovdc/versions/installapp.ps1"
                             ],
                             "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installapp.ps1"
                         }

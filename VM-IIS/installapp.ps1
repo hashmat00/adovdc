@@ -13,3 +13,4 @@ Invoke-WebRequest -Uri $url -OutFile $target
 $file = "c:\files\VC_redist.x64.exe"
 
 (Start-Process -FilePath $file -ArgumentList "/install /quiet /norestart" -Wait -PassThru).ExitCode
+

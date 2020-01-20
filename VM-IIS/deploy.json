@@ -305,9 +305,10 @@
           }
      },
     
-     {  
+    
+      {  
           "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('vmName'),'/', 'InstallWebServer')]",
+            "name": "[concat(parameters('vmName'),'/', 'installapp')]",
             "apiVersion": "2018-10-01",
             "location": "[parameters('location')]",
             "dependsOn": [
@@ -319,11 +320,11 @@
                 "typeHandlerVersion": "1.7",
                 "autoUpgradeMinorVersion":true,
                 "settings": {
-                    "fileUris": [
-                        "https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/tutorial-vm-extension/installWebServer.ps1"
-                    ],
-                    "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installWebServer.ps1"
-                }
+                            "fileUris": [
+                                "https://github.gapinc.com/raw/cloudexecution/vdc/master/gapFunctionalAreas/testHub01/test/shirWorkstation/hub/installapp.ps1?token=AAAWp4O34zgn10ARzFGlIqiP8oKOcFNRks5eL1yGwA%3D%3D"
+                            ],
+                            "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installapp.ps1"
+                        }
             }
      }
 

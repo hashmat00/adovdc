@@ -305,9 +305,10 @@
           }
      },
     
-     {  
+    
+      {  
           "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('vmName'),'/', 'InstallWebServer')]",
+            "name": "[concat(parameters('vmName'),'/', 'installapp')]",
             "apiVersion": "2018-10-01",
             "location": "[parameters('location')]",
             "dependsOn": [
@@ -319,11 +320,11 @@
                 "typeHandlerVersion": "1.7",
                 "autoUpgradeMinorVersion":true,
                 "settings": {
-                    "fileUris": [
-                        "https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/tutorial-vm-extension/installWebServer.ps1"
-                    ],
-                    "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installWebServer.ps1"
-                }
+                            "fileUris": [
+                                "https://raw.githubusercontent.com/hashmat00/adovdc/versions/installapp.ps1"
+                            ],
+                            "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File installapp.ps1"
+                        }
             }
      }
 

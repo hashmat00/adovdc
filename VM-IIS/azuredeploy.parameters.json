@@ -21,7 +21,7 @@
              "value": "vm-01"
             },
             "vmSize": {
-              "value": "A1_v2"
+              "value": "B2s"
           },
           "adminpassword": {
             "reference": {
